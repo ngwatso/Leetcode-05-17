@@ -71,3 +71,63 @@ P:
 create array that represents 32 bit binary, take input, iterate trhough binArr; when a number can be subtracted and keep input >= 0, binStr += '1', else, binStr += '0'.  count "1"s in binStr.
 
 '''
+
+class Solution:
+    def sumOddLengthSubarrays(self, arr: List[int]) -> int:
+        
+        x = len(arr) + 1
+        s = 0
+
+        def checkValidArrays(a, l):
+
+            total = 0
+
+            for i in range(len(a)):
+
+                if len(a[i:i+l]) == l:
+                    total += sum(a[i:i+l])
+                else:
+                    continue
+
+            return total
+
+        while x > 1:
+
+            x -= 1
+
+            if x % 2 == 0:
+                continue
+            else:
+                s += checkValidArrays(arr, x)
+
+        return s
+'''
+
+U:
+
+[1, 4, 2, 5, 3]
+output = 58
+
+[1, 2]
+output = 3
+
+[1, 2, 3, 4, 5, 6]
+[1] = 1
+[2] = 2
+[3] = 3
+[4] = 4
+[5] = 5
+[6] = 6
+[1, 2, 3] = 6
+[2, 3, 4] = 9
+[3, 4, 5] = 12
+[4, 5, 6] = 15
+[1, 2, 3, 4, 5] = 15
+[2, 3, 4, 5, 6] = 20
+output = 98
+
+P:
+
+create var x = length of arr.  while x > 0, if x is odd, create all possible arrays of length x and add their sums to sum.
+
+'''
